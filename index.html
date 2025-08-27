@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BC125AT Programmer</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>BC125AT Scanner Programmer</h1>
+            <div class="connection-panel">
+                <div class="connection-controls">
+                    <button id="selectPort" class="btn btn-primary">Select COM Port</button>
+                    <button id="connect" class="btn btn-success" disabled>Connect</button>
+                    <button id="disconnect" class="btn btn-danger" disabled>Disconnect</button>
+                    <span id="connectionStatus" class="status">Disconnected</span>
+                </div>
+                <div id="scannerInfo" class="scanner-info" style="display: none;">
+                    <span id="modelInfo">Model: </span>
+                    <span id="firmwareInfo">Firmware: </span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="control-panel">
+                <div class="left-controls">
+                    <button id="readChannels" class="btn btn-primary" disabled>Read Channels</button>
+                    <button id="programChannels" class="btn btn-warning" disabled>Program to Scanner</button>
+                    <div id="progress" class="progress-container" style="display: none;">
+                        <div class="progress-bar">
+                            <div id="progressFill" class="progress-fill"></div>
+                        </div>
+                        <span id="progressText">0%</span>
+                    </div>
+                </div>
+                <div class="right-controls">
+                    <button id="importCSV" class="btn btn-secondary">Import CSV</button>
+                    <button id="exportCSV" class="btn btn-secondary" disabled>Export CSV</button>
+                    <input type="file" id="fileInput" accept=".csv" style="display: none;">
+                </div>
+            </div>
+
+            <div class="channel-controls">
+                <div class="filter-controls">
+                    <label for="channelFilter">Filter channels:</label>
+                    <input type="text" id="channelFilter" placeholder="Search by name or frequency...">
+                    <label for="showEmpty">
+                        <input type="checkbox" id="showEmpty" checked> Show empty channels
+                    </label>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table id="channelTable" class="channel-table">
+                    <thead>
+                        <tr>
+                            <th>CH</th>
+                            <th>Name</th>
+                            <th>Frequency (MHz)</th>
+                            <th>Modulation</th>
+                            <th>CTCSS/DCS</th>
+                            <th>Delay</th>
+                            <th>Lockout</th>
+                            <th>Priority</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="channelTableBody">
+                        <!-- Channels will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Channel Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Channel <span id="editChannelNumber"></span></h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="editChannelForm">
+                    <div class="form-group">
+                        <label for="editName">Name:</label>
+                        <input type="text" id="editName" maxlength="16">
+                    </div>
+                    <div class="form-group">
+                        <label for="editFrequency">Frequency (MHz):</label>
+                        <input type="number" id="editFrequency" step="0.000001" min="25" max="512">
+                    </div>
+                    <div class="form-group">
+                        <label for="editModulation">Modulation:</label>
+                        <select id="editModulation">
+                            <option value="AUTO">AUTO</option>
+                            <option value="AM">AM</option>
+                            <option value="FM">FM</option>
+                            <option value="NFM">NFM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editCTCSSDCS">CTCSS/DCS:</label>
+                        <select id="editCTCSSDCS">
+                            <option value="0">NONE</option>
+                            <option value="127">SEARCH</option>
+                            <option value="240">NO_TONE</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editDelay">Delay:</label>
+                        <select id="editDelay">
+                            <option value="-10">-10s</option>
+                            <option value="-5">-5s</option>
+                            <option value="0">0s</option>
+                            <option value="1">1s</option>
+                            <option value="2">2s</option>
+                            <option value="3">3s</option>
+                            <option value="4">4s</option>
+                            <option value="5">5s</option>
+                        </select>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="editLockout"> Lockout
+                        </label>
+                        <label>
+                            <input type="checkbox" id="editPriority"> Priority
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="saveChannel" class="btn btn-primary">Save</button>
+                <button type="button" id="deleteChannel" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bc125at.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

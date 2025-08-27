@@ -1,0 +1,16 @@
+{
+  "name": "bc125at-programmer",
+  "version": "1.0.0",
+  "description": "Web-based programmer for BC125AT Scanner",
+  "main": "index.html",
+  "scripts": {
+    "serve": "python3 -m http.server 8080",
+    "dev": "live-server --port=8080"
+  },
+  "keywords": ["bc125at", "scanner", "programming", "serial"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
