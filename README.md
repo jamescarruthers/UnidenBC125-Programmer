@@ -1,4 +1,4 @@
-# BC125AT Programmer
+# Uniden BC125AT, BC125XLT, BC125XLTC programmer
 
 A web-based programmer for the BC125AT Scanner using the Web Serial API.
 
