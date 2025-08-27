@@ -4,7 +4,7 @@ A web-based programmer for the Uniden BC125AT, BC125XLT, BC125XLTC scanners usin
 
 ## Features
 
-- **Serial Communication**: Connect to your BC125AT scanner via USB/serial
+- **Serial Communication**: Connect to your BC125* scanner via USB/serial
 - **Channel Management**: Read, edit, and program all 500 channels
 - **Spreadsheet Interface**: View and edit channels in a compact, table-like format
 - **CSV Import/Export**: Save and load channel configurations
