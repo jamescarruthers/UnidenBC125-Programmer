@@ -1,5 +1,6 @@
 /**
  * BC125AT Scanner Protocol Library
+ * Also works with BC125XLT and BC125XLTC models
  * Implements the PC Programming Command protocol for the BC125AT Scanner
  */
 
